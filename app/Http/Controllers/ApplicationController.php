@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Applicationation;
 use Illuminate\Http\Request;
 
-class ApplicationationController extends Controller
+class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ApplicationationController extends Controller
      */
     public function index()
     {
-        //
+        return view('application.home');
     }
 
     /**
