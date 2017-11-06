@@ -24,7 +24,17 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        //
+        return view('application.create');
+    }
+
+    /**
+     * Show the form for search a old resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('application.search');
     }
 
     /**

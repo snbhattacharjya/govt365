@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('application/home','ApplicationController@index')->name('application.home');
+Route::get('application/create','ApplicationController@create')->name('application.create');
+Route::post('application/store','ApplicationController@store')->name('application.store');
+Route::get('application/search','ApplicationController@search')->name('application.search');
