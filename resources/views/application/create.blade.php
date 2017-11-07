@@ -198,15 +198,15 @@
             </div>
 
               <div class="col-md-6">
-                <div class="form-group{{ $errors->has('khatiyan_no') ? ' has-error' : '' }}">
-                    <label for="Brief History" class="col-md-4 control-label">Brief History</label>
+                <div class="form-group{{ $errors->has('receive_date') ? ' has-error' : '' }}">
+                    <label for="Brief History" class="col-md-4 control-label">Receive Date</label>
 
                     <div class="col-md-8">
-                        <textarea id="brief_history" type="text" class="form-control" name="brief_history" value="{{ old('brief_history') }}" required></textarea>
+                        <input id="receive_date" type="text" class="form-control" name="receive_date" value="{{ old('receive_date') }}" required autofocus>
 
-                        @if ($errors->has('brief_history'))
+                        @if ($errors->has('receive_date'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('brief_history') }}</strong>
+                                <strong>{{ $errors->first('receive_date') }}</strong>
                             </span>
                         @endif
                     </div>
