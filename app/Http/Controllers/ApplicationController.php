@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use Illuminate\Http\Request;
+use Session;
 
 class ApplicationController extends Controller
 {
@@ -12,9 +13,15 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+       $this->middleware('auth');
+    }
+
     public function index()
     {
-        return view('application.home');
+        $applications = Application::all();
+        return view('application.index')->with('applications', $applications);
     }
 
     /**
@@ -28,16 +35,6 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Show the form for search a old resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search()
-    {
-        return view('application.search');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +44,7 @@ class ApplicationController extends Controller
     {
         $request->validate([
           'appl_name' => 'required|string|max:255',
-          'mobile' => 'nullable|number|max:10',
+          'mobile' => 'nullable|digits:10',
           'plot_no' => 'required',
           'khatiyan_no' => 'required',
           'brief_history' => 'required|max:255',
@@ -67,9 +64,11 @@ class ApplicationController extends Controller
         $application->subdivision = $request->subdivision;
         $application->block = $request->block;
         $application->appl_category = $request->appl_category;
-        $application->receive_date = $request->receive_date;
+        $application->receive_date = date('Y-m-d',strtotime($request->receive_date));
 
         $application->save();
+        Session::flash('success','Application Added Successfully with ID: '.$application->id);
+        return redirect()->route('application.create');
     }
 
     /**
@@ -80,7 +79,8 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+      $application = Application::find($application->id);
+      return view('application.show')->with('application', $application);
     }
 
     /**

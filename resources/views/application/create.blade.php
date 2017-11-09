@@ -7,7 +7,7 @@
       <div class="page-header">
         <h1>Applications <small>Create New</small></h1>
       </div>
-
+      @include('layouts.message')
       <form class="form-horizontal" method="POST" action="{{ route('application.store') }}">
           {{ csrf_field() }}
           <div class="row">
@@ -144,7 +144,7 @@
           <div class="row">
 
             <div class="col-md-6">
-              <div class="form-group{{ $errors->has('khatiyan_no') ? ' has-error' : '' }}">
+              <div class="form-group{{ $errors->has('brief_history') ? ' has-error' : '' }}">
                   <label for="Brief History" class="col-md-4 control-label">Brief History</label>
 
                   <div class="col-md-8">
