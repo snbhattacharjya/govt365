@@ -64,7 +64,7 @@ class ApplicationController extends Controller
         $application->subdivision = $request->subdivision;
         $application->block = $request->block;
         $application->appl_category = $request->appl_category;
-        $application->receive_date = date('Y-m-d',strtotime($request->receive_date));
+        $application->receive_date = date('Y-d-m',strtotime($request->receive_date));
 
         $application->save();
         Session::flash('success','Application Added Successfully with ID: '.$application->id);
