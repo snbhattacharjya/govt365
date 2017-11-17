@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-
+@include('layouts.message')
   <div class="row">
     <div class="col-md-8">
       <div class="page-header">
@@ -35,8 +35,15 @@
 
     <div class="col-md-4">
       <div class="well">
-        <a href="{{ route('application.edit',$application) }}" class="btn btn-warning">Edit</a>
-        <a href="{{ route('application.destroy',$application) }}" class="btn btn-danger">Delete</a>
+        <div class="row">
+          <div class="col-md-6"><a href="{{ route('application.edit',$application) }}" class="btn btn-warning btn-right">Edit</a></div>
+          <div class="col-md-6">
+            <form method="POST" action="{{ route('application.destroy',$application) }}">
+              {{ csrf_field() }} {{method_field('DELETE')}}
+              <button type="submit" class="btn btn-danger btn-right">Delete</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

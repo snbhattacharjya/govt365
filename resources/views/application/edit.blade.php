@@ -5,11 +5,11 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="page-header">
-        <h1>Applications <small>Create New</small></h1>
+        <h1>Applications <small>Modify Details</small></h1>
       </div>
-      @include('layouts.message')
-      <form class="form-horizontal" method="POST" action="{{ route('application.store') }}">
-          {{ csrf_field() }}
+      
+      <form class="form-horizontal" method="POST" action="{{ route('application.update',$application) }}">
+          {{ csrf_field() }}{{ method_field('PUT') }}
           <div class="row">
             <div class="col-md-6">
 
@@ -17,7 +17,7 @@
                   <label for="appl_name" class="col-md-4 control-label">Applicant Name</label>
 
                   <div class="col-md-8">
-                      <input id="appl_name" type="text" class="form-control" name="appl_name" value="{{ old('appl_name') }}" required autofocus>
+                      <input id="appl_name" type="text" class="form-control" name="appl_name" value="{{ $application->appl_name }}" required autofocus>
 
                       @if ($errors->has('appl_name'))
                           <span class="help-block">
@@ -31,7 +31,7 @@
                   <label for="mobile" class="col-md-4 control-label">Mobile No</label>
 
                   <div class="col-md-8">
-                      <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" required>
+                      <input id="mobile" type="text" class="form-control" name="mobile" value="{{ $application->mobile }}" required>
 
                       @if ($errors->has('mobile'))
                           <span class="help-block">
@@ -45,7 +45,7 @@
                   <label for="plot_no" class="col-md-4 control-label">Plot No</label>
 
                   <div class="col-md-8">
-                      <input id="plot_no" type="text" class="form-control" name="plot_no" value="{{ old('plot_no') }}" required>
+                      <input id="plot_no" type="text" class="form-control" name="plot_no" value="{{ $application->plot_no }}" required>
 
                       @if ($errors->has('plot_no'))
                           <span class="help-block">
@@ -59,7 +59,7 @@
                   <label for="khatiyan_no" class="col-md-4 control-label">Khatiyan No</label>
 
                   <div class="col-md-8">
-                      <input id="khatiyan_no" type="text" class="form-control" name="khatiyan_no" value="{{ old('khatiyan_no') }}" required>
+                      <input id="khatiyan_no" type="text" class="form-control" name="khatiyan_no" value="{{ $application->khatiyan_no }}" required>
 
                       @if ($errors->has('khatiyan_no'))
                           <span class="help-block">
@@ -148,7 +148,7 @@
                   <label for="Brief History" class="col-md-4 control-label">Brief History</label>
 
                   <div class="col-md-8">
-                      <textarea id="brief_history" type="text" class="form-control" name="brief_history" required>{{ old('brief_history') }}</textarea>
+                      <textarea id="brief_history" type="text" class="form-control" name="brief_history" required>{{ $application->brief_history }}</textarea>
 
                       @if ($errors->has('brief_history'))
                           <span class="help-block">
@@ -164,7 +164,7 @@
                   <label for="comment" class="col-md-4 control-label">Comment</label>
 
                   <div class="col-md-8">
-                      <textarea id="comment" type="text" class="form-control" name="comment" required>{{ old('comment') }}</textarea>
+                      <textarea id="comment" type="text" class="form-control" name="comment" required>{{ $application->comment }}</textarea>
 
                       @if ($errors->has('comment'))
                           <span class="help-block">
@@ -202,7 +202,7 @@
                     <label for="Brief History" class="col-md-4 control-label">Receive Date</label>
 
                     <div class="col-md-8">
-                        <input id="receive_date" type="text" class="form-control" name="receive_date" value="{{ old('receive_date') }}" required autofocus>
+                        <input id="receive_date" type="text" class="form-control" name="receive_date" value="{{ date('d/m/Y',strtotime($application->receive_date)) }}" required autofocus>
 
                         @if ($errors->has('receive_date'))
                             <span class="help-block">
@@ -218,7 +218,7 @@
             <div class="col-md-4 col-md-offset-4">
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Save
+                    Update
                 </button>
               </div>
             </div>

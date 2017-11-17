@@ -64,7 +64,7 @@ class ApplicationController extends Controller
         $application->subdivision = $request->subdivision;
         $application->block = $request->block;
         $application->appl_category = $request->appl_category;
-        $application->receive_date = date('Y-d-m',strtotime($request->receive_date));
+        $application->receive_date = date_format(date_create_from_format('d/m/Y',$request->receive_date),'Y-m-d');
 
         $application->save();
         Session::flash('success','Application Added Successfully with ID: '.$application->id);
@@ -91,7 +91,8 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        //
+      $application = Application::find($application->id);
+      return view('application.edit')->with('application', $application);
     }
 
     /**
@@ -103,7 +104,33 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        //
+      $request->validate([
+        'appl_name' => 'required|string|max:255',
+        'mobile' => 'nullable|digits:10',
+        'plot_no' => 'required',
+        'khatiyan_no' => 'required',
+        'brief_history' => 'required|max:255',
+        'comment' => 'required|max:255',
+        'receive_date' => 'date_format:d/m/Y|before:tomorrow'
+      ]);
+
+      $application = Application::find($application->id);
+      $application->appl_name = $request->appl_name;
+      $application->mobile = $request->mobile;
+      $application->plot_no = $request->plot_no;
+      $application->khatiyan_no = $request->khatiyan_no;
+      $application->brief_history = $request->brief_history;
+      $application->comment = $request->comment;
+      $application->state = $request->state;
+      $application->district = $request->district;
+      $application->subdivision = $request->subdivision;
+      $application->block = $request->block;
+      $application->appl_category = $request->appl_category;
+      $application->receive_date = date_format(date_create_from_format('d/m/Y',$request->receive_date),'Y-m-d');
+
+      $application->save();
+      Session::flash('success','Application with ID: '.$application->id.' Updted Successfully');
+      return redirect()->route('application.show',$application);
     }
 
     /**
@@ -114,6 +141,9 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+      $application = Application::find($application->id);
+      $application->delete();
+      Session::flash('success','Application with ID: '.$application->id.' Deleted Successfully');
+      return redirect()->route('application.index');
     }
 }
