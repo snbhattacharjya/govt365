@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('application','ApplicationController');
+Route::resource('category','CategoryController');
