@@ -19,6 +19,10 @@
           <p class="list-group-item-text">{{$application->appl_name}}</p>
         </a>
         <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">Category:</h4>
+          <p class="list-group-item-text">{{$application->category->category_name}}</p>
+        </a>
+        <a href="#" class="list-group-item">
           <h4 class="list-group-item-heading">Brief History:</h4>
           <p class="list-group-item-text">{{$application->brief_history}}</p>
         </a>

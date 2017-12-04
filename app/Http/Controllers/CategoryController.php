@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -41,7 +42,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'category_name' => 'required|string|max:255'
+      ]);
+
+      $category = new Category;
+      $category->category_name = $request->category_name;
+
+      $category->save();
+      Session::flash('success','Category Added Successfully with ID: '.$category->id);
+      return redirect()->route('category.index');
     }
 
     /**

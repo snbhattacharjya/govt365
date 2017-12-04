@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Application;
 use Illuminate\Http\Request;
 use Session;
+use App\Category;
 
 class ApplicationController extends Controller
 {
@@ -31,7 +32,8 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        return view('application.create');
+        $categories = Category::all();
+        return view('application.create')->with(['categories' => $categories]);
     }
 
     /**
@@ -92,7 +94,8 @@ class ApplicationController extends Controller
     public function edit(Application $application)
     {
       $application = Application::find($application->id);
-      return view('application.edit')->with('application', $application);
+      $categories = Category::all();
+      return view('application.edit')->with(['application' => $application, 'categories' => $categories]);
     }
 
     /**

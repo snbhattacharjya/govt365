@@ -7,7 +7,7 @@
       <div class="page-header">
         <h1>Applications <small>Modify Details</small></h1>
       </div>
-      
+
       <form class="form-horizontal" method="POST" action="{{ route('application.update',$application) }}">
           {{ csrf_field() }}{{ method_field('PUT') }}
           <div class="row">
@@ -185,7 +185,15 @@
 
                   <div class="col-md-8">
                     <select id="appl_category" class="form-control" name="appl_category" required autofocus>
-                      <option value="1">ROR Correction</option>
+
+                    @foreach ($categories as $category)
+                      @if($category->id == $application->appl_category)
+                        <option value={{$category->id}} selected>{{$category->category_name}}</option>
+                      @else
+                        <option value={{$category->id}}>{{$category->category_name}}</option>
+                      @endif
+                    @endforeach
+
                     </select>
 
                       @if ($errors->has('appl_category'))

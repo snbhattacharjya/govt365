@@ -185,7 +185,9 @@
 
                   <div class="col-md-8">
                     <select id="appl_category" class="form-control" name="appl_category" required autofocus>
-                      <option value="1">ROR Correction</option>
+                      @foreach ($categories as $category)
+                        <option value={{ $category->id }}>{{ $category->category_name }}</option>
+                      @endforeach
                     </select>
 
                       @if ($errors->has('appl_category'))

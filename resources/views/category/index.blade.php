@@ -8,6 +8,10 @@
       <div class="page-header">
         <h1>Application Categories</h1>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
       <table class="table">
         <thead>
           <tr>
@@ -25,7 +29,7 @@
               <td>{{ $category->category_name }}</td>
               <td>{{ date('M, d Y H:i:s',strtotime($category->created_at)) }}</td>
               <td>{{ date('M, d Y H:i:s',strtotime($category->updated_at)) }}</td>
-              <td><a href="{{ route('application.show',$category->id) }}" class="btn btn-info btn-sm">Modify</a></td>
+              <td><a href="{{ route('category.edit',$category->id) }}" class="btn btn-info btn-sm">Modify</a></td>
             </tr>
           @endforeach
         </tbody>
@@ -33,10 +37,28 @@
     </div>
     <div class="col-md-6">
       <div class="well well-lg">
-          <a href="{{ route('application.create') }}" class="btn btn-success">Create New</a>
+        <form class="form-horizontal" method="POST" action="{{ route('category.store') }}">
+            {{ csrf_field() }}
+            <div class="form-group{{ $errors->has('appl_name') ? ' has-error' : '' }}">
+                <label for="category_name" class="col-md-4 control-label">Category Name: </label>
+                <div class="col-md-4">
+                  <input id="category_name" type="text" class="form-control" name="category_name" value="{{ old('category_name') }}" required autofocus>
+
+                  @if ($errors->has('category_name'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('category_name') }}</strong>
+                      </span>
+                  @endif
+                </div>
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-success btn-block">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New
+                  </button>
+                </div>
+            </div>
+        </form>
       </div>
     </div>
   </div>
-
 </div>
 @endsection
